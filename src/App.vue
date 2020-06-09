@@ -6,6 +6,9 @@
       :currentQuestion='questions[index]'
       :next='next'
     />
+    <div v-if='!questions.length'>
+      LOADING...
+    </div>
   </div>
 </template>
 
