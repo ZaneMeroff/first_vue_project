@@ -1,4 +1,4 @@
-# first_idea_box
+# my fist vue.js app!
 
 ## Project setup
 ```
