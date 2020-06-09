@@ -2,11 +2,13 @@
   <div class='question-box-container'>
     <div class='question-container'>
       <h3>{{ currentQuestion.question }}</h3>
-      <p v-for='answer in answers' :key='answer'>
+      <p v-for='answer in answers' :key='answer' class='possible-answer'>
         {{ answer }}
       </p>
-      <button>submit</button>
-      <button @click='next'>next</button>
+      <div class='buttons-container'>
+        <button class='submit-button'>submit</button>
+        <button @click='next' class='next-button'>next</button>
+      </div>
     </div>
   </div>
 </template>
