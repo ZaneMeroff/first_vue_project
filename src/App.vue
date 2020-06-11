@@ -9,6 +9,7 @@
       :currentQuestion='questions[index]'
       :next='next'
       :increment='increment'
+      :numTotal='numTotal'
     />
     <h1 v-if='!questions.length'>
       LOADING...
