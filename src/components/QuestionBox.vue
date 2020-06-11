@@ -6,13 +6,25 @@
         :key='answer'
         class='possible-answer'
         @click.prevent='selectAnswer(index)'
-        :class="[ selectedIndex === index ? 'selected' : '' ]"
+        :class="answerClass(index)"
       >
         {{ answer }}
       </p>
       <div class='buttons-container'>
-        <button class='submit-button'>submit</button>
-        <button @click='next' class='next-button'>next</button>
+        <button
+          @click='submitAnswer'
+          :disabled='selectedIndex === null || answered'
+          class='submit-button'
+        >
+          submit
+        </button>
+        <button
+          @click='next'
+          class='next-button'
+          :disabled='!answered'
+        >
+          next
+        </button>
       </div>
     </div>
   </div>
@@ -23,7 +35,8 @@
   export default {
     props: {
       currentQuestion: Object,
-      next: Function
+      next: Function,
+      increment: Function
     },
     methods: {
       selectAnswer(index) {
@@ -32,18 +45,41 @@
       shuffleAnswers() {
         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
         this.shuffledAnswers = _.shuffle(answers)
+      },
+      submitAnswer() {
+        let isCorrect = false
+        if (this.selectedIndex === this.correctIndex) {
+          isCorrect = true
+        }
+        this.answered = true
+        this.increment(isCorrect)
+      },
+      answerClass(index) {
+        let answerClass = ''
+        if (!this.answered && this.selectedIndex === index) {
+          answerClass = 'selected'
+        } else if (this.answered && this.correctIndex === index) {
+          answerClass = 'correct'
+        } else if (this.answered && this.selectedIndex === index && this.correctIndex !== index) {
+          answerClass = 'incorrect'
+        }
+        return answerClass
       }
     },
     watch: {
       currentQuestion() {
         this.selectedIndex = null
         this.shuffleAnswers()
+        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
+        this.answered = false
       }
     },
     data() {
       return {
         selectedIndex: null,
-        shuffledAnswers: []
+        correctIndex: null,
+        shuffledAnswers: [],
+        answered: false
       }
     },
     computed: {
@@ -52,6 +88,10 @@
         answers.push(this.currentQuestion.correct_answer)
         return answers;
       }
+    },
+    mounted() {
+      this.shuffleAnswers()
+      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
     }
   }
 </script>

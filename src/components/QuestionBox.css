@@ -48,7 +48,6 @@
 .next-button:hover,
 .submit-button:hover {
   cursor: pointer;
-  transform: scale(1.2);
 }
 
 .selected {
