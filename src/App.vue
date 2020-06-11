@@ -3,22 +3,29 @@
     <Header
       :numCorrect='numCorrect'
       :numTotal='numTotal'
+      :roundNumber='index'
     />
     <QuestionBox
-      v-if='questions.length'
+      v-if='questions.length && !endOfGame'
       :currentQuestion='questions[index]'
       :next='next'
       :increment='increment'
+      :numTotal='numTotal'
+      :handleEndOfGame='handleEndOfGame'
     />
     <h1 v-if='!questions.length'>
       LOADING...
     </h1>
+    <div v-if='endOfGame'>
+      <h1>GAME OVER! You got {{numCorrect}} correct!</h1>
+      <button @click='startGame'>PLAY AGAIN!</button>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import QuestionBox from './components/QuestionBox.vue'
+import Header from './components/Header/Header.vue'
+import QuestionBox from './components/QuestionBox/QuestionBox.vue'
 
 export default {
   name: 'App',
@@ -35,6 +42,15 @@ export default {
         this.numCorrect++
       }
       this.numTotal++
+    },
+    handleEndOfGame() {
+      this.endOfGame = true
+    },
+    startGame() {
+      fetch('https://opentdb.com/api.php?amount=10&category=27&type=multiple')
+        .then(response => response.json())
+        .then(apiData => this.questions = apiData.results)
+        .then(() => this.endOfGame = false)
     }
   },
   data() {
@@ -42,18 +58,17 @@ export default {
       questions: [],
       index: 0,
       numCorrect: 0,
-      numTotal: 0
+      numTotal: 0,
+      endOfGame: false
     }
   },
-  mounted: function() {
-    fetch('https://opentdb.com/api.php?amount=10&category=27&type=multiple')
-      .then(response => response.json())
-      .then(apiData => this.questions = apiData.results)
+  mounted() {
+    this.startGame()
   }
 }
 </script>
 
 <style>
-  @import './components/Header.css';
-  @import './components/QuestionBox.css';
+  @import './components/Header/Header.css';
+  @import './components/QuestionBox/QuestionBox.css';
 </style>

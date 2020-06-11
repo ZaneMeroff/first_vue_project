@@ -19,7 +19,7 @@
           submit
         </button>
         <button
-          @click='next'
+          @click='onNextButtonClick'
           class='next-button'
           :disabled='!answered'
         >
@@ -36,7 +36,9 @@
     props: {
       currentQuestion: Object,
       next: Function,
-      increment: Function
+      increment: Function,
+      numTotal: Number,
+      handleEndOfGame: Function
     },
     methods: {
       selectAnswer(index) {
@@ -54,14 +56,22 @@
         this.answered = true
         this.increment(isCorrect)
       },
+      onNextButtonClick() {
+        if (this.numTotal === 10) {
+          this.handleEndOfGame()
+        } else {
+          this.next()
+        }
+      },
       answerClass(index) {
         let answerClass = ''
+        this.answered ? answerClass = 'disabled' : ''
         if (!this.answered && this.selectedIndex === index) {
-          answerClass = 'selected'
+          answerClass = 'selected disabled'
         } else if (this.answered && this.correctIndex === index) {
-          answerClass = 'correct'
+          answerClass = 'correct disabled'
         } else if (this.answered && this.selectedIndex === index && this.correctIndex !== index) {
-          answerClass = 'incorrect'
+          answerClass = 'incorrect disabled'
         }
         return answerClass
       }
