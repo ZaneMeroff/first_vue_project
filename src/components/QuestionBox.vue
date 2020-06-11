@@ -11,8 +11,16 @@
         {{ answer }}
       </p>
       <div class='buttons-container'>
-        <button class='submit-button'>submit</button>
-        <button @click='next' class='next-button'>next</button>
+        <button
+          @click='submitAnswer'
+          class='submit-button'>
+          submit
+        </button>
+        <button
+          @click='next'
+          class='next-button'>
+          next
+        </button>
       </div>
     </div>
   </div>
@@ -23,7 +31,8 @@
   export default {
     props: {
       currentQuestion: Object,
-      next: Function
+      next: Function,
+      increment: Function
     },
     methods: {
       selectAnswer(index) {
@@ -32,17 +41,26 @@
       shuffleAnswers() {
         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
         this.shuffledAnswers = _.shuffle(answers)
+      },
+      submitAnswer() {
+        let isCorrect = false
+        if (this.selectedIndex === this.correctIndex) {
+          isCorrect = true
+        }
+        this.increment(isCorrect)
       }
     },
     watch: {
       currentQuestion() {
         this.selectedIndex = null
         this.shuffleAnswers()
+        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
       }
     },
     data() {
       return {
         selectedIndex: null,
+        correctIndex: null,
         shuffledAnswers: []
       }
     },
@@ -52,6 +70,9 @@
         answers.push(this.currentQuestion.correct_answer)
         return answers;
       }
+    },
+    mounted() {
+      this.shuffleAnswers()
     }
   }
 </script>
