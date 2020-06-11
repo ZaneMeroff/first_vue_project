@@ -1,7 +1,7 @@
 <template>
   <div class='question-box-container'>
     <div class='question-container'>
-      <h3>{{ currentQuestion.question }}</h3>
+      <h3 class='question-text'>{{ currentQuestion.question }}</h3>
       <p v-for='(answer, index) in answers'
         :key='answer'
         class='possible-answer'
