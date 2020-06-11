@@ -14,12 +14,15 @@
         <button
           @click='submitAnswer'
           :disabled='selectedIndex === null || answered'
-          class='submit-button'>
+          class='submit-button'
+        >
           submit
         </button>
         <button
           @click='next'
-          class='next-button'>
+          class='next-button'
+          :disabled='!answered'
+        >
           next
         </button>
       </div>
@@ -88,6 +91,7 @@
     },
     mounted() {
       this.shuffleAnswers()
+      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
     }
   }
 </script>
