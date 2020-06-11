@@ -6,13 +6,14 @@
         :key='answer'
         class='possible-answer'
         @click.prevent='selectAnswer(index)'
-        :class="[ selectedIndex === index ? 'selected' : '' ]"
+        :class="answerClass(index)"
       >
         {{ answer }}
       </p>
       <div class='buttons-container'>
         <button
           @click='submitAnswer'
+          :disabled='selectedIndex === null || answered'
           class='submit-button'>
           submit
         </button>
@@ -47,7 +48,19 @@
         if (this.selectedIndex === this.correctIndex) {
           isCorrect = true
         }
+        this.answered = true
         this.increment(isCorrect)
+      },
+      answerClass(index) {
+        let answerClass = ''
+        if (!this.answered && this.selectedIndex === index) {
+          answerClass = 'selected'
+        } else if (this.answered && this.correctIndex === index) {
+          answerClass = 'correct'
+        } else if (this.answered && this.selectedIndex === index && this.correctIndex !== index) {
+          answerClass = 'incorrect'
+        }
+        return answerClass
       }
     },
     watch: {
@@ -55,13 +68,15 @@
         this.selectedIndex = null
         this.shuffleAnswers()
         this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
+        this.answered = false
       }
     },
     data() {
       return {
         selectedIndex: null,
         correctIndex: null,
-        shuffledAnswers: []
+        shuffledAnswers: [],
+        answered: false
       }
     },
     computed: {
