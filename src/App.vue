@@ -71,4 +71,15 @@ export default {
 <style>
   @import './components/Header/Header.css';
   @import './components/QuestionBox/QuestionBox.css';
+  #app {
+    align-items: center;
+    background: center/100% url(./images/green_fern_background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-bottom: 100px;
+    width: 100%;
+  }
 </style>
