@@ -1,0 +1,23 @@
+.rules-outer-container {
+  height: 400px;
+  width: 400px;
+}
+
+.rules-text {
+  font-size: 120%;
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 550px) {
+
+  .rules-outer-container {
+    width: auto;
+  }
+
+  .rules-text {
+    padding: 30px;
+  }
+
+}
