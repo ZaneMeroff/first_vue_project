@@ -19,3 +19,14 @@
   font-size: 250%;
   text-transform: uppercase;
 }
+
+.view-rules-button {
+  background-color: rgb(0, 0, 0, 0);
+  border: none;
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.view-rules-button:hover {
+  cursor: pointer;
+}
