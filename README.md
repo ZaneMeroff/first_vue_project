@@ -1,5 +1,5 @@
 # Animal Trivia Game! 🦒🦀🐊
-my first attempt building a game with Vue.js
+my first attempt building a project with Vue.js
 
 #### Link to Live Site
 https://zanemeroff.github.io/animal_quiz_game
