@@ -16,9 +16,10 @@
     <h1 v-if='!questions.length'>
       LOADING...
     </h1>
-    <div v-if='endOfGame'>
-      <h1>GAME OVER! You got {{numCorrect}} correct!</h1>
-      <button @click='startGame'>PLAY AGAIN!</button>
+    <div v-if='endOfGame' class='game-over-container'>
+      <p class='game-over-text'>game over!</p>
+      <p class='number-correct-text'>You got <span class='num-correct'>{{numCorrect}}</span> correct!</p>
+      <button class='play-again-button' @click='startGame'>play again!</button>
     </div>
   </div>
 </template>
@@ -71,15 +72,5 @@ export default {
 <style>
   @import './components/Header/Header.css';
   @import './components/QuestionBox/QuestionBox.css';
-  #app {
-    align-items: center;
-    background: center/100% url(./images/green_fern_background.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding-bottom: 100px;
-    width: 100%;
-  }
+  @import './App.css';
 </style>
