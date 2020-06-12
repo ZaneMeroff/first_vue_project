@@ -4,15 +4,19 @@
       :numCorrect='numCorrect'
       :numTotal='numTotal'
       :roundNumber='index'
+      :rulesVisible='rulesVisible'
+      :handleRulesVisible='handleRulesVisible'
     />
     <QuestionBox
-      v-if='questions.length && !endOfGame'
+      v-if='questions.length && !endOfGame '
       :currentQuestion='questions[index]'
       :next='next'
       :increment='increment'
       :numTotal='numTotal'
       :handleEndOfGame='handleEndOfGame'
+      :class="[ rulesVisible ? 'hidden' : '']"
     />
+    <Rules v-if='rulesVisible'/>
     <h1 v-if='!questions.length' class='loading-text'>loading...</h1>
     <div v-if='endOfGame' class='game-over-container'>
       <p class='game-over-text'>game over!</p>
@@ -25,12 +29,13 @@
 <script>
 import Header from './components/Header/Header.vue'
 import QuestionBox from './components/QuestionBox/QuestionBox.vue'
-
+import Rules from './components/Rules/Rules.vue'
 export default {
   name: 'App',
   components: {
     Header,
-    QuestionBox
+    QuestionBox,
+    Rules
   },
   methods: {
     next() {
@@ -53,6 +58,13 @@ export default {
         .then(response => response.json())
         .then(apiData => this.questions = apiData.results)
         .then(() => this.endOfGame = false)
+    },
+    handleRulesVisible() {
+      if (this.rulesVisible) {
+        this.rulesVisible = false
+      } else {
+        this.rulesVisible = true
+      }
     }
   },
   data() {
@@ -61,7 +73,8 @@ export default {
       index: 0,
       numCorrect: 0,
       numTotal: 0,
-      endOfGame: false
+      endOfGame: false,
+      rulesVisible: false,
     }
   },
   mounted() {
@@ -73,5 +86,6 @@ export default {
 <style>
   @import './components/Header/Header.css';
   @import './components/QuestionBox/QuestionBox.css';
+  @import './components/Rules/Rules.css';
   @import './App.css';
 </style>
