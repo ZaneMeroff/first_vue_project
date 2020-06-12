@@ -5,16 +5,17 @@
 .header-container {
   height: auto;
   width: 100%;
-  background-color: #424242;
   text-align: center;
 }
 
-.question-counter {
+.header-text {
   color: #FFF;
-  padding: 10px;
+  padding: 5px;
 }
 
 .title {
-  color: #ff00b1;
-  padding: 5px;
+  color: #ffeb3b;
+  padding-top: 20px;
+  font-size: 250%;
+  text-transform: uppercase;
 }

@@ -1,7 +1,13 @@
+* {
+  font-family: 'Indie Flower';
+  letter-spacing: 2px;
+}
+
 .question-box-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
 .question-container {
@@ -10,21 +16,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 250px;
-  width: 500px;
-  border: 2px dotted #000;
+  height: auto;
+  width: auto;
+  background-color: rgb(0, 255, 55, .5);
+  border-radius: 20px;
+}
+
+.question-text {
+  font-size: 120%;
+  text-align: center;
+  padding: 10px;
+  color: #ffeb3b;
 }
 
 .possible-answer {
-  border: 2px solid #000;
   width: 250px;
   padding: 3px;
-  margin: 3px;
+  margin: 5px;
+  background-color: #FFF;
+  height: 28px;
+  border-radius: 20px;
+  text-align: center;
+  border: none;
+  font-size: 100%;
 }
 
 .possible-answer:hover {
   cursor: pointer;
-  border: 2px solid #ff00b1;
+  background-color: #bfbfbf;
 }
 
 .buttons-container {
@@ -34,15 +53,15 @@
 .next-button,
 .submit-button {
   height: 30px;
-  width: 60px;
-  margin: 5px;
+  width: 70px;
+  margin: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #4eff74;
 }
 
 .next-button {
-  background-color: #ff00b1;
+  background-color: #f0ff00;
 }
 
 .next-button:hover,
@@ -51,7 +70,7 @@
 }
 
 .selected {
-  background-color: #cecece;
+  color: red;
 }
 
 .correct {
@@ -59,7 +78,7 @@
 }
 
 .incorrect {
-  background-color: red;
+  background-color: #ef4646;
 }
 
 .disabled {
