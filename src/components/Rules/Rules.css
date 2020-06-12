@@ -10,6 +10,14 @@
   text-align: center;
 }
 
+.green {
+  color: #4eff74;
+}
+
+.red {
+  color: #ef4646;
+}
+
 @media only screen and (max-width: 550px) {
 
   .rules-outer-container {

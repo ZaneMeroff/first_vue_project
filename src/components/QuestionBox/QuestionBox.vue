@@ -1,15 +1,13 @@
 <template>
   <div class='question-box-container'>
     <div class='question-container'>
-      <h3 class='question-text'>{{ currentQuestion.question }}</h3>
-      <button v-for='(answer, index) in answers'
+      <h3 class='question-text'>{{ cleanData(currentQuestion.question) }}</h3>
+      <button v-for='(answer, index) in shuffledAnswers'
         :key='answer'
         class='possible-answer'
         @click.prevent='selectAnswer(index)'
         :class="answerClass(index)"
-      >
-        {{ answer }}
-      </button>
+      > {{ answer }} </button>
       <div class='buttons-container'>
         <button
           @click='submitAnswer'
@@ -43,6 +41,7 @@
       shuffleAnswers() {
         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
         this.shuffledAnswers = _.shuffle(answers)
+        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
       },
       submitAnswer() {
         let isCorrect = false
@@ -70,13 +69,26 @@
           answerClass = 'incorrect disabled'
         }
         return answerClass
+      },
+      cleanData(data) {
+        if (data.includes('&quot;') ||
+            data.includes('&Uuml;') ||
+            data.includes('&#039;') ||
+            data.includes('&amp;')) {
+          data = data.split('&quot;').join('')
+          data = data.split('&#039;').join('')
+          data = data.split('&amp;').join(' ')
+          data = data.split('&Uuml;').join('U')
+          return data
+        } else {
+          return data
+        }
       }
     },
     watch: {
       currentQuestion() {
         this.selectedIndex = null
         this.shuffleAnswers()
-        this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
         this.answered = false
       }
     },
@@ -97,7 +109,6 @@
     },
     mounted() {
       this.shuffleAnswers()
-      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer)
     }
   }
 </script>
