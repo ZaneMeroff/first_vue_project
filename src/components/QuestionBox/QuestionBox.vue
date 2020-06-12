@@ -111,4 +111,5 @@
       this.shuffleAnswers()
     }
   }
+  
 </script>
