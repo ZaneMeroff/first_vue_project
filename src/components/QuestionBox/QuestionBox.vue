@@ -1,30 +1,26 @@
 <template>
   <div class='question-box-container'>
     <div class='question-container'>
-      <h3>{{ currentQuestion.question }}</h3>
-      <p v-for='(answer, index) in answers'
+      <h3 class='question-text'>{{ currentQuestion.question }}</h3>
+      <button v-for='(answer, index) in answers'
         :key='answer'
         class='possible-answer'
         @click.prevent='selectAnswer(index)'
         :class="answerClass(index)"
       >
         {{ answer }}
-      </p>
+      </button>
       <div class='buttons-container'>
         <button
           @click='submitAnswer'
           :disabled='selectedIndex === null || answered'
           class='submit-button'
-        >
-          submit
-        </button>
+        > submit </button>
         <button
           @click='onNextButtonClick'
           class='next-button'
           :disabled='!answered'
-        >
-          next
-        </button>
+        > next </button>
       </div>
     </div>
   </div>

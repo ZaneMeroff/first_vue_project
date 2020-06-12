@@ -13,12 +13,11 @@
       :numTotal='numTotal'
       :handleEndOfGame='handleEndOfGame'
     />
-    <h1 v-if='!questions.length'>
-      LOADING...
-    </h1>
-    <div v-if='endOfGame'>
-      <h1>GAME OVER! You got {{numCorrect}} correct!</h1>
-      <button @click='startGame'>PLAY AGAIN!</button>
+    <h1 v-if='!questions.length' class='loading-text'>loading...</h1>
+    <div v-if='endOfGame' class='game-over-container'>
+      <p class='game-over-text'>game over!</p>
+      <p class='number-correct-text'>You got <span class='num-correct'>{{numCorrect}}</span> correct!</p>
+      <button class='play-again-button' @click='startGame'>play again!</button>
     </div>
   </div>
 </template>
@@ -47,6 +46,9 @@ export default {
       this.endOfGame = true
     },
     startGame() {
+      this.index = 0
+      this.numCorrect = 0
+      this.numTotal = 0
       fetch('https://opentdb.com/api.php?amount=10&category=27&type=multiple')
         .then(response => response.json())
         .then(apiData => this.questions = apiData.results)
@@ -71,4 +73,5 @@ export default {
 <style>
   @import './components/Header/Header.css';
   @import './components/QuestionBox/QuestionBox.css';
+  @import './App.css';
 </style>

@@ -1,0 +1,53 @@
+#app {
+  align-items: center;
+  background: center/100% url(./images/green_fern_background.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-bottom: 100px;
+  width: 100%;
+}
+
+.game-over-container {
+  text-align: center;
+}
+
+.game-over-text,
+.number-correct-text {
+  font-size: 200%;
+  color: #4eff74;
+  text-align: center;
+}
+
+.game-over-text {
+  margin-top: 50px;
+  text-transform: uppercase;
+}
+
+.loading-text {
+  font-size: 250%;
+  color: #FFF;
+  margin-top: 50px;
+}
+
+.num-correct {
+  color: #ffeb3b;
+  font-size: 150%;
+}
+
+.play-again-button {
+  text-transform: uppercase;
+  height: 30px;
+  width: 120px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(240, 255, 0, .75);
+}
+
+.play-again-button:hover {
+  cursor: pointer;
+  background-color: rgb(240, 255, 0, 1);
+}
