@@ -2,7 +2,7 @@
   "name": "first_idea_box",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://zanemeroff.github.io/animal_quiz_game"
+  "homepage": "http://zanemeroff.github.io/animal_quiz_game",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
